@@ -144,6 +144,12 @@ public class AccountingServiceFacadeWebTier implements AccountingServiceFacade {
 	}
 
 	@Override
+	public List<GLCodeDto> accountHeadExpenditure(String glCode) {
+		List<GLCodeDto> accountingDtos = null;
+		accountingDtos = accountingDao.findAccountHeadExpenditureGlCodes(glCode);
+		return accountingDtos;
+	}
+	@Override
 	public List<ViewTransactionsDto> getAccountingTransactions(Date toTrxnDate,Date fromTrxnDate,
 			int startRecord, int numberOfRecords) {
 		List<ViewTransactionsDto> accountingTransactions = null;

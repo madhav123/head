@@ -116,6 +116,16 @@ public class AccountingDaoHibernate extends LegacyGenericDao implements
 	}
 
 	@Override
+	public List<GLCodeDto> findAccountHeadExpenditureGlCodes(String glCode) {
+		final Map<String, Object> queryparameters = new HashMap<String, Object>();
+		queryparameters.put("Gl_Code", glCode);
+		final List<GLCodeDto> accountHeadGlCodes = executeNamedQueryWithResultTransformer(
+				"ChartOfAccountsForMifos.AccountHeadExpenditureGlCodes", queryparameters,
+				GLCodeDto.class);
+		return accountHeadGlCodes;
+	}
+
+	@Override
 	public boolean savingGeneralLedgerTransaction(GlMasterBO glMasterBO) {
 		boolean result = false;
 		try {

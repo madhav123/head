@@ -69,6 +69,7 @@ public interface SimpleAccountingConstants {
 	String CREDIT_ACCOUNT = "simpleAccounting.creditAccount";
 	String BRANCH_NAME="simpleAccounting.branch";
 	String AMOUNT = "simpleAccounting.amount";
+	String MEMBERID="simpleAccounting.memberId";
 	String CHEQUE_NO = "simpleAccounting.chequeNo";
 	String CHEQUE_DATE = "simpleAccounting.chequeDate";
 	String BANK_NAME = "simpleAccounting.bankName";

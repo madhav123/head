@@ -195,8 +195,17 @@ public class SingleGeneralLedgerAction extends BaseAction {
 		SingleGeneralLedgerActionForm actionForm = (SingleGeneralLedgerActionForm) form;
 		List<GLCodeDto> accountingDtos = null;
 
-		accountingDtos = accountingServiceFacade.accountHead(actionForm
-				.getMainAccount());
+	/*	accountingDtos = accountingServiceFacade.accountHead(actionForm
+				.getMainAccount());*/
+		
+		if(actionForm.getTrxnType().equalsIgnoreCase("BP")){
+			accountingDtos = accountingServiceFacade.accountHeadExpenditure(actionForm
+					.getMainAccount());
+		}
+		else{
+			accountingDtos = accountingServiceFacade.accountHead(actionForm
+					.getMainAccount());
+		}
 		storingSession(request, "AccountHeadGlCodes", accountingDtos);
 		return mapping.findForward(ActionForwards.load_success.toString());
 	}

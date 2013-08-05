@@ -351,6 +351,7 @@ public class MultipleGeneralLedgerActionForm extends BaseActionForm {
 		String subAccount = resources
 				.getString(SimpleAccountingConstants.ACCOUNT_HEAD);
 		String Amount = resources.getString(SimpleAccountingConstants.AMOUNT);
+		String MemberId=resources.getString(SimpleAccountingConstants.MEMBERID);
 		String Notes = resources
 				.getString(SimpleAccountingConstants.TRXN_NOTES);
 
@@ -463,6 +464,14 @@ public class MultipleGeneralLedgerActionForm extends BaseActionForm {
 							SimpleAccountingConstants.ENTER_GRETERTHAN, memberId));
 		}
 
+		if(getTrxnType().equalsIgnoreCase("BP"))
+			if (memberId == null || "".equals(memberId.trim())) {
+				errors.add(SimpleAccountingConstants.MANDATORYFIELDS,
+						new ActionMessage(
+								SimpleAccountingConstants.MANDATORYFIELDS,
+								MemberId));
+			}
+		
 		if (StringUtils.isNotBlank(getAmount())) {
 			DoubleConversionResult conversionResult = validateAmount(
 					getAmount(), Amount, errors);

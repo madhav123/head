@@ -181,8 +181,16 @@ public class MultipleGeneralLedgerAction extends BaseAction {
 		MultipleGeneralLedgerActionForm actionForm = (MultipleGeneralLedgerActionForm) form;
 		List<GLCodeDto> accountingDtos = null;
 
-		accountingDtos = accountingServiceFacade.accountHead(actionForm
-				.getMainAccount());
+		/*accountingDtos = accountingServiceFacade.accountHead(actionForm
+				.getMainAccount());*/
+		if(actionForm.getTrxnType().equalsIgnoreCase("BP")){
+			accountingDtos = accountingServiceFacade.accountHeadExpenditure(actionForm
+					.getMainAccount());
+		}
+		else{
+			accountingDtos = accountingServiceFacade.accountHead(actionForm
+					.getMainAccount());
+		}
 		List<GLCodeDto> snolist=null;
 		snolist=new ArrayList<GLCodeDto>();
 	int sno=1;

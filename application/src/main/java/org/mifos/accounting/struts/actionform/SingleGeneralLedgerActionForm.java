@@ -315,6 +315,7 @@ public class SingleGeneralLedgerActionForm extends BaseActionForm {
 		String subAccount = resources
 				.getString(SimpleAccountingConstants.ACCOUNT_HEAD);
 		String Amount = resources.getString(SimpleAccountingConstants.AMOUNT);
+		String MemberId = resources.getString(SimpleAccountingConstants.MEMBERID);
 		String Notes = resources
 				.getString(SimpleAccountingConstants.TRXN_NOTES);
 
@@ -401,9 +402,16 @@ public class SingleGeneralLedgerActionForm extends BaseActionForm {
 		if (memberId.length()!=10&& memberId.length()>0) {
 			errors.add(SimpleAccountingConstants.MANDATORYFIELDS,
 					new ActionMessage(
-							SimpleAccountingConstants.ENTER_GRETERTHAN, memberId));
+							SimpleAccountingConstants.MANDATORYFIELDS, memberId));
 		}
-
+		
+		if(getTrxnType().equalsIgnoreCase("BP"))
+			if (memberId == null || "".equals(memberId.trim())) {
+				errors.add(SimpleAccountingConstants.MANDATORYFIELDS,
+						new ActionMessage(
+								SimpleAccountingConstants.MANDATORYFIELDS,
+								MemberId));
+			}
 		if (StringUtils.isNotBlank(getAmount())) {
 			DoubleConversionResult conversionResult = validateAmount(
 					getAmount(), Amount, errors);

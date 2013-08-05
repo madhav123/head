@@ -129,6 +129,7 @@ public interface AccountingDao {
 	public List<MisProcessingTransactionsDto> processMisPostings(Date lastProcessDate,
 			String officeId);
 	public void updateLastProcessUpdatedDate(Date lastProcessDate, String globalOfficeNumber);
+	
 
 	//coa mapping
 
@@ -139,6 +140,7 @@ public interface AccountingDao {
 	public List<GLCodeDto> findCoaBranchNames(String coaname);
 	public List<CoaNamesDto> findCoaNamesWithGlcodeValues(String coaname);
 	public boolean savingCoaBranchTransaction(CoaBranchBO CoaBranchBO);
+	public List<GLCodeDto> findAccountHeadExpenditureGlCodes(String glCode);
 
 	//consolidated
 

@@ -55,6 +55,7 @@ public interface AccountingServiceFacade {
 	List<GLCodeDto> mainAccountForBank();
 
 	List<GLCodeDto> accountHead(String glCode);
+    List<GLCodeDto> accountHeadExpenditure(String glCode);
 
 	List<ViewTransactionsDto> getAccountingTransactions(Date toTrxnDate,Date fromTrxnDate,
 			int startRecord, int numberOfRecords);
