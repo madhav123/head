@@ -40,10 +40,12 @@ import org.mifos.application.util.helpers.ActionForwards;
 import org.mifos.dto.domain.CoaNamesDto;
 import org.mifos.dto.domain.DynamicOfficeDto;
 import org.mifos.dto.domain.GLCodeDto;
+import org.mifos.dto.domain.OfficeDetailsDto;
 import org.mifos.dto.domain.OfficeGlobalDto;
 import org.mifos.dto.domain.OfficeHierarchy;
 import org.mifos.dto.domain.OfficesList;
 import org.mifos.dto.domain.RolesActivityDto;
+import org.mifos.dto.screen.OfficeFormDto;
 import org.mifos.framework.struts.action.BaseAction;
 import org.mifos.framework.util.helpers.DateUtils;
 import org.mifos.framework.util.helpers.TransactionDemarcate;
@@ -70,10 +72,20 @@ public class MultipleGeneralLedgerAction extends BaseAction {
 		boolean generalledgersave=rolesactivitydto.isEmpty();
 		UserContext context = getUserContext(request);
 		actionForm.setOfficeLevelId(String.valueOf(context.getOfficeLevelId()));
-		List listOfOfficeHierarchyObject = getOfficeLevels(actionForm);
+		//List listOfOfficeHierarchyObject = getOfficeLevels(actionForm);
+	    Short officeLevel = context.getOfficeLevelId();
+        OfficeFormDto officeFormDto = this.officeServiceFacade.retrieveOfficeFormInformation(officeLevel);
+        List<OfficeDetailsDto> listOfOfficeHierarchyObjectddd=officeFormDto.getOfficeLevels();
+        List<OfficeHierarchy> listofofficess=new ArrayList<OfficeHierarchy>();
+        OfficeHierarchy officeHierarchy;
+   
+        for(OfficeDetailsDto officeDetailsDto:listOfOfficeHierarchyObjectddd){
+            officeHierarchy=new OfficeHierarchy(officeDetailsDto.getLevelId().toString(),officeDetailsDto.getLevelName());
+            listofofficess.add(officeHierarchy);   
+           
+        }
 
-
-		storingSession(request, "listOfOffices", listOfOfficeHierarchyObject);
+		storingSession(request, "listOfOffices", listofofficess);
 		storingSession(request, "officeLevelId", actionForm.getOfficeLevelId());
 		storingSession(request, "glsave", generalledgersave);
 		storingSession(request, "OfficesOnHierarchy", null);

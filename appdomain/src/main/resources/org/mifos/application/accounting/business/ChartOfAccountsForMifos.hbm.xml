@@ -77,12 +77,13 @@
 		<return-scalar column="glname" type="string" />
         <![CDATA[
      SELECT gll.glcode_value as glcode, coo.coa_name as glname
-			FROM coahierarchy c
-			      LEFT JOIN coa co ON co.coa_id = c.parent_coaid
-			      LEFT JOIN gl_code gl ON gl.glcode_id = co.glcode_id
-			      LEFT JOIN coa coo ON coo.coa_id = c.coa_id
-			      LEFT JOIN gl_code gll ON gll.glcode_id = coo.glcode_id
-      WHERE c.parent_coaid is not null order by 1;
+   FROM coahierarchy c
+         LEFT JOIN coa co ON co.coa_id = c.parent_coaid
+         LEFT JOIN gl_code gl ON gl.glcode_id = co.glcode_id
+         LEFT JOIN coa coo ON coo.coa_id = c.coa_id
+         LEFT JOIN gl_code gll ON gll.glcode_id = coo.glcode_id
+      WHERE coo.coa_id <(SELECT COA_ID FROM coa WHERE COA_NAME='INCOME')
+order by 1;
         ]]>
 
 	</sql-query>
